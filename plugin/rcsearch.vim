@@ -8,9 +8,11 @@ function! Rcsearch(seq)
       "C" => "G",
       "N" => "N",
       }
-    fwdseq = seq
     rcseq = seq.each_char.map{|a| revcomp[a.upcase]}.reverse.join
-    VIM.command('/\c'+seq+'\|'+rcseq)
+    pattern = '\c' + seq + '\|' + rcseq
+    VIM.command("let pattern = \'#{pattern}\'")
 EOF
+  let @/ = pattern
+  normal! n
 endfunction
 
