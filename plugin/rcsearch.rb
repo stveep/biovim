@@ -1,5 +1,5 @@
 module BioVim
-  def rcsearch(seq)
+  def self.rcsearch(seq)
     revcomp = {
       "A" => "T",
       "G" => "C",
