@@ -1,6 +1,6 @@
-*Reverse-complement sequence search in Vim.*
+###Reverse-complement sequence search in Vim.
 
-Install using [Pathogen][https://github.com/tpope/vim-pathogen#installation].
+Install using [Pathogen](https://github.com/tpope/vim-pathogen#installation).
 
 ```{bash}
 cd ~/.vim/bundle
