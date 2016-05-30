@@ -1,14 +1,15 @@
 module BioVim
   def self.rcsearch(seq)
-    return nil unless seq.match(/\A[GATCN]+\z/i)
+    return 0 unless seq.match(/\A[GATCN]+\z/i)
     revcomp = {
       "A" => "T",
       "G" => "C",
       "T" => "A",
+      "U" => "A",
       "C" => "G",
-      "N" => "[ATGC]",
+      "N" => "[UATGC]",
       }
     rcseq = seq.each_char.map{|a| revcomp[a.upcase]}.reverse.join
-    '\c' + seq.upcase.gsub("N","[GATC]") + '\|' + rcseq
+    '\c' + seq.upcase.gsub("N","[UGATC]") + '\|' + rcseq
   end
 end
