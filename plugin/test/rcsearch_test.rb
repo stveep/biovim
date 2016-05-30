@@ -5,10 +5,10 @@ class RcsearchTest < Test::Unit::TestCase
     assert_equal "\\cAGTC\\|GACT", BioVim.rcsearch("AGTC")
   end
   def test_N
-    assert_equal "\\c[GATC][GATC]G\\|C[ATGC][ATGC]", BioVim.rcsearch("NNG")
+    assert_equal "\\c[UGATC][UGATC]G\\|C[UATGC][UATGC]", BioVim.rcsearch("NNG")
   end
   def test_nil_return
-    assert_nil BioVim.rcsearch("NotDNA")
+    assert_equal 0, BioVim.rcsearch("NotDNA")
   end
   def test_lowercase_input
     assert_equal "\\cAGTC\\|GACT", BioVim.rcsearch("agtc")
