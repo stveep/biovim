@@ -12,3 +12,4 @@ EOF
     echom "Invalid sequence - please use only GATCN."
   endif
 endfunction
+command -nargs=1 Biorc :call Rcsearch(<f-args>)
