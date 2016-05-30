@@ -1,5 +1,6 @@
 module BioVim
   def self.rcsearch(seq)
+    return nil unless seq.match(/\A[GATCN]+\z/i)
     revcomp = {
       "A" => "T",
       "G" => "C",
@@ -8,6 +9,6 @@ module BioVim
       "N" => "[ATGC]",
       }
     rcseq = seq.each_char.map{|a| revcomp[a.upcase]}.reverse.join
-    '\c' + seq.gsub("N","[GATC]") + '\|' + rcseq
+    '\c' + seq.upcase.gsub("N","[GATC]") + '\|' + rcseq
   end
 end

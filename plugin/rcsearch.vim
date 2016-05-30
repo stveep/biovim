@@ -5,6 +5,8 @@ function! Rcsearch(seq)
     pattern = BioVim.rcsearch(seq)
     VIM.command("let pattern = \'#{pattern}\'")
 EOF
-  let @/ = pattern
-  normal! n
+  if pattern
+    let @/ = pattern
+    normal! n
+  endif
 endfunction
