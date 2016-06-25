@@ -1,7 +1,9 @@
 module BioVim
-  def self.rcsearch(seq)
-    return 0 unless seq.match(/\A[GATCN]+\z/i)
-    revcomp = {
+  class << self
+    attr_accessor :complements
+  end
+
+  @complements = {
       "A" => "T",
       "G" => "C",
       "T" => "A",
@@ -9,7 +11,14 @@ module BioVim
       "C" => "G",
       "N" => "[UATGC]",
       }
-    rcseq = seq.each_char.map{|a| revcomp[a.upcase]}.reverse.join
+
+  def self.reverse_complement(seq)
+    seq.each_char.map{|a| complements[a.upcase]}.reverse.join
+  end
+
+  def self.rcsearch(seq)
+    return 0 unless seq.match(/\A[GATCN]+\z/i)
+    rcseq = BioVim.reverse_complement(seq)
     '\c' + seq.upcase.gsub("N","[UGATC]") + '\|' + rcseq
   end
 end
