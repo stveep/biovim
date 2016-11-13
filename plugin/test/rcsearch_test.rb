@@ -9,7 +9,7 @@ class RcsearchTest < Test::Unit::TestCase
     assert_equal "\\cAGTC\\|GACT", BioVim.rcsearch("AGTC")
   end
   def test_N
-    assert_equal "\\c[UGATC][UGATC]G\\|C[UATGC][UATGC]", BioVim.rcsearch("NNG")
+    assert_equal "\\c[UGATC][UGATC]G\\|C[UGATC][UGATC]", BioVim.rcsearch("NNG")
   end
 
   def test_nil_return
@@ -20,4 +20,11 @@ class RcsearchTest < Test::Unit::TestCase
     assert_equal "\\cAGTC\\|GACT", BioVim.rcsearch("agtc")
   end
 
+  def test_newline
+    assert_equal "CCC\nTTT", BioVim.reverse_complement("AAA\nGGG")
+  end
+
+  def test_newline_stripping
+    assert_equal "CCC\nTTT\n", BioVim.reverse_complement("AAA\nGGG\n")
+  end
 end

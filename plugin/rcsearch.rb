@@ -9,16 +9,22 @@ module BioVim
       "T" => "A",
       "U" => "A",
       "C" => "G",
-      "N" => "[UATGC]",
+      "N" => "N",
+      "\n" => "\n",
       }
 
   def self.reverse_complement(seq)
-    seq.each_char.map{|a| complements[a.upcase]}.reverse.join
+    rc = seq.each_char.map{|a| complements[a.upcase]}.reverse.join
+    if rc[0] == "\n"
+      rc.lstrip! + "\n"
+    else
+      rc
+    end
   end
 
   def self.rcsearch(seq)
     return 0 unless seq.match(/\A[GATCN]+\z/i)
     rcseq = BioVim.reverse_complement(seq)
-    '\c' + seq.upcase.gsub("N","[UGATC]") + '\|' + rcseq
+    '\c' + seq.upcase.gsub("N","[UGATC]") + '\|' + rcseq.gsub("N","[UGATC]")
   end
 end
