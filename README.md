@@ -8,6 +8,8 @@ cd ~/.vim/bundle
 git clone https://github.com/stveep/biovim.git
 ```
 
+Vim needs to be compiled with ruby support. `vim --version | grep ruby` should show +ruby. Many vim installations have this by default.
+
 ###Reverse-complement sequence search
 Run as follows, e.g. to search for NGG or CCN:
 ```{vim}
@@ -65,7 +67,7 @@ shift-V,B
 # => opens browser with UCSC location above
 ```
 
-*This is a quick and dirty search that ignores other equally good or near matches - use at own risk!*
+**This is a quick and dirty search that ignores other equally good or near matches - use at own risk!**
 
 For more details see plugin/test directory.
 
