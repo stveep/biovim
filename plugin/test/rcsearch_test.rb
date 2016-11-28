@@ -5,6 +5,19 @@ class RcsearchTest < Test::Unit::TestCase
     assert_equal "ATGC", BioVim.reverse_complement("GCAT")
   end
 
+  def test_reverse_complement_lower
+    assert_equal "ATGC", BioVim.reverse_complement("gcat")
+  end
+
+  def test_input_validation
+    assert_equal 0, BioVim.reverse_complement("xyz")	
+    assert_equal 0, BioVim.reverse_complement("GATCf")	
+  end
+
+  def test_space
+    assert_equal "GA TT", BioVim.reverse_complement("AA TC")	
+  end
+
   def test_smoke
     assert_equal "\\cAGTC\\|GACT", BioVim.rcsearch("AGTC")
   end

@@ -11,9 +11,11 @@ module BioVim
       "C" => "G",
       "N" => "N",
       "\n" => "\n",
+      " " => " ",
       }
 
   def self.reverse_complement(seq)
+    return 0 unless seq.match(/\A[ gatcnGATCN\n]+\z/i)
     rc = seq.each_char.map{|a| complements[a.upcase]}.reverse.join
     if rc[0] == "\n"
       rc.lstrip! + "\n"
