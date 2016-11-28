@@ -19,7 +19,7 @@ command -nargs=1 Biorc :call Rcsearch(<f-args>)
 
 " Replaces the selected text (by movement or visual character or line) with
 " its reverse complement
-function! GetSelection(type)
+function! DeleteSelection(type)
   if a:type ==# 'v'
     execute "normal! `<v`>d"
   elseif a:type ==# 'V'
@@ -37,7 +37,7 @@ endfunction
 
 function! RcOperator(type)
   let saved_register = @@
-  call GetSelection(a:type)
+  call DeleteSelection(a:type)
   ruby <<EOF
   	seq = VIM::evaluate('@@')
   	VIM.command("let replacement = '#{BioVim.reverse_complement(seq)}'")

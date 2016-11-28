@@ -41,6 +41,32 @@ If your leader character is different, replace the comma with your custom leader
 
 Alternatively, select sequence using visual line (shift-v) or character (v) modes and type the `,R` command.
 
+###Lucky BLAT searching
+
+Basic BLAT searching of visual (character or line) highlighted sequence is supported via UCSC's "I'm feeling Lucky" BLAT search. Currently only human hg38 without hacking.
+
+Add to `~/.vimrc`:
+```{vim}
+nnoremap <leader>L :set operatorfunc=LuckyBlat<cr>g@
+vnoremap <leader>L :<c-u>call LuckyBlat(visualmode())<cr>
+nnoremap <leader>B :set operatorfunc=LuckyBlatURL<cr>g@
+vnoremap <leader>B :<c-u>call LuckyBlatURL(visualmode())<cr>
+```
+
+Select sequence as for in-place reverse complement above. `,L` prints the location of the top BLAT hit as a `message` (use `:messages` to view history). `,B` opens default browser with the genomic location of the top BLAT hit.
+```{vim}
+AGAGCGGGCGCGCCTCTTGCAAGAAATGCAGCGA
+```
+```
+shift-V,L 
+# =>BLAT: AGAGCGGGCGCGCCTCTTGCAAGAAATGCAGCGA^@
+#Position: chr1:226407853-226407886
+shift-V,B
+# => opens browser with UCSC location above
+```
+
+*This is a quick and dirty search that ignores other equally good or near matches - use at own risk!*
+
 For more details see plugin/test directory.
 
 

@@ -12,7 +12,7 @@ class LuckyBlat
   @url_regexp = /\/cgi-bin(\/hgTracks.+)'\);/ 
 
   def initialize(seq)
-    @seq = seq
+    @seq = seq.strip.gsub(/\s/,'')
   end
 
   def curl(opts)
@@ -20,7 +20,7 @@ class LuckyBlat
 		       "command" => "start",
 	               "userSeq" => @seq})
     opts_string = URI.encode_www_form(opts)
-    command =  "curl -d '" + opts_string + "' #{ LuckyBlat.url }"
+    command =  "curl -s -d '" + opts_string + "' #{ LuckyBlat.url }"
     Open3.capture2(command)
   end
 
